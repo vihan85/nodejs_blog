@@ -3,7 +3,7 @@ const morgan = require('morgan');
 const path = require('path');
 const handlebars = require('express-handlebars');
 const app = express();
-const port = 3000;
+const port = 3200;
 const db = require('./config/db')
 //connect mongodb
 db.connect()

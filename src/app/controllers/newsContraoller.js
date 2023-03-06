@@ -1,9 +1,15 @@
 const Data = require('../models/test')
+const mongooseHelper = require('../../helper/mongoose.helper')
+const mongooseToObject = mongooseHelper.mongooseToObject
 class NewsHandler {
     index(req, res) {
         Data.find({})
-        .then((data)=> {
-            res.json(data)
+        .then((respson)=> {
+            const data = mongooseToObject(respson)
+            res.render('news', {data})
+        })
+        .catch((err)=>{
+            console.log̣̣̣̣̣̣̣̣̣̣̣̣̣(err)
         })
     }
     show(req, res) {
