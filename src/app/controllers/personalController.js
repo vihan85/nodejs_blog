@@ -12,15 +12,24 @@ class PersonalHandler {
             res.render('personal/personal',infomation)
         })
     }
+
+    //[GET] / personal/create
     create(req, res) {
         res.render("create")
-        console.log(req)
     }
+
+    // [POST] /personal/store
     store(req, res) {
         const fomatData = req.body
-        fomatData.title = 'hoc lap trinh duoc 10 thang'
         const updateDatainMongoDB = new Data(fomatData)
         updateDatainMongoDB.save()
+            .then(()=>{
+                res.redirect('/news')
+            })
+            .catch(()=>{
+
+            })
+       
        
     }
 }

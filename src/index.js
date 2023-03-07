@@ -3,8 +3,13 @@ const morgan = require('morgan');
 const path = require('path');
 const handlebars = require('express-handlebars');
 const app = express();
-const port = 3200;
+const port = 3210;
 const db = require('./config/db')
+
+// fix don't read req.body when use method POST
+app.use(express.json());
+app.use(express.urlencoded({ extended: true}));
+
 //connect mongodb
 db.connect()
 const routes = require('./routes');
