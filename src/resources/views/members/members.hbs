@@ -1,0 +1,22 @@
+<div class="">
+    <table class="table mt-40">
+    <thead>
+        <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Thum</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each data}}
+            <tr>
+            <th scope="row">{{sum @index 1}}</th>
+            <td>{{this.title}}</td>
+            <td>{{this.thum}}</td>
+            <td><a href="/personal/{{this._id}}/edit" class="btn btn-link">Sửa</a></td>
+            <td><a href="/personal/{{this._id}}/edit" class="btn btn-link">Xóa</a></td>
+            </tr>
+        {{/each}}
+    </tbody>
+    </table>
+</div>

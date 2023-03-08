@@ -6,6 +6,10 @@ const app = express();
 const port = 3210;
 const db = require('./config/db')
 
+//  method Override 
+var methodOverride = require('method-override')
+app.use(methodOverride('_method')) // override with POST having ?_method=DELETE
+
 // fix don't read req.body when use method POST
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
@@ -22,6 +26,9 @@ app.engine(
     '.hbs',
     handlebars.engine({
         extname: '.hbs',
+        helpers: {
+            sum: (a, b) => a + b,
+        }
     }),
 );
 app.set('view engine', '.hbs');

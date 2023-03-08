@@ -27,10 +27,30 @@ class PersonalHandler {
                 res.redirect('/news')
             })
             .catch(()=>{
-
             })
        
-       
+    }
+    // [PUT] /personal/:id/edit
+    edit(req, res) {
+        const id = req.params.id
+        Data.findById(id)
+        .then((member)=>{
+            const data = member.toObject()
+            res.render('members/memberEdit',data)
+        })
+        .catch (err=>{
+            console.log(err)
+        })
+    }
+    update(req, res) {
+        const id = req.params.id
+        Data.updateOne({_id: id}, req.body)
+        .then(()=>{
+          res.redirect('/personal/members')
+        })
+        .catch (err=>{
+            console.log(err)
+        })
     }
 }
 module.exports = new PersonalHandler();
