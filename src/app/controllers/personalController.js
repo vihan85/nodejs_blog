@@ -42,11 +42,35 @@ class PersonalHandler {
             console.log(err)
         })
     }
+
+    show(req, res) {
+        Data.find({})
+        .then((respson)=> {
+            const data =mongooseToObject(respson)
+            res.render('members/members',{data})
+        })
+        .catch((err)=>{
+           console.log(err)
+        })
+    }
+
     update(req, res) {
         const id = req.params.id
         Data.updateOne({_id: id}, req.body)
         .then(()=>{
           res.redirect('/personal/members')
+        })
+        .catch (err=>{
+            console.log(err)
+        })
+    }
+
+    delete(req, res) {
+        
+        const dataNeedDelete = Data.findById({_id: req.params.id})
+        Data.deleteOne({_id: req.params.id})
+        .then(()=>{
+          res.redirect('back')
         })
         .catch (err=>{
             console.log(err)

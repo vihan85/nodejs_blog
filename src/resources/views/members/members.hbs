@@ -13,10 +13,52 @@
             <th scope="row">{{sum @index 1}}</th>
             <td>{{this.title}}</td>
             <td>{{this.thum}}</td>
-            <td><a href="/personal/{{this._id}}/edit" class="btn btn-link">Sửa</a></td>
-            <td><a href="/personal/{{this._id}}/edit" class="btn btn-link">Xóa</a></td>
+            <td><a href="/personal/{{this._id}}/edit" class="btn btn-link">Change</a></td>
+            <td><a href="/personal/{{this._id}}/delete" class="btn btn-link" data-toggle="modal" data-target="#exampleModal" data-id={{this._id}} data-name={{this.slug}} >Delete</a></td>
             </tr>
         {{/each}}
     </tbody>
     </table>
 </div>
+
+{{!-- modal comfirm delete --}}
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+{{!-- form delete --}}
+<form method="POST" id="form-delete"></form>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        $('#exampleModal').on('show.bs.modal', function (event) {
+            const button = $(event.relatedTarget) // Button that triggered the modal
+            const id = button.data('id') // Extract info from data-* attributes
+            const name = button.data('name') // Extract info from data-* attributes
+            const modalBodyElemt = $('.modal-body')
+            modalBodyElemt.html(`Do you want to delete member ${name}`)
+            const btnDelete = $('.btn-danger')
+            const formDelete = $('#form-delete')
+            const actionValue =  `/personal/${id}/delete?_method=DELETE`
+            btnDelete.click(function () {
+                formDelete.attr('action',actionValue)
+                formDelete.submit()
+            })
+        })
+    });
+
+</script>
