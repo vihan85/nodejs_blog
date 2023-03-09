@@ -9,3 +9,11 @@ nav a {
 
 nav .dropdown-menu a {
   color: black !important; }
+
+.member-list {
+  font-size: 20px;
+  font-weight: 600;
+  display: block; }
+  .member-list a {
+    display: block;
+    margin: 10px 0; }

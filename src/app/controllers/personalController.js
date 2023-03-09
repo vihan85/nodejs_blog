@@ -43,6 +43,17 @@ class PersonalHandler {
         })
     }
 
+    showTrash(req, res) {
+        Data.findDeleted({})
+        .then((respson)=> {
+            const data =mongooseToObject(respson)
+            res.render('members/memberTrash',{data})
+        })
+        .catch((err)=>{
+           console.log(err)
+        })
+    }
+
     show(req, res) {
         Data.find({})
         .then((respson)=> {
@@ -66,9 +77,7 @@ class PersonalHandler {
     }
 
     delete(req, res) {
-        
-        const dataNeedDelete = Data.findById({_id: req.params.id})
-        Data.deleteOne({_id: req.params.id})
+        Data.delete({_id: req.params.id})
         .then(()=>{
           res.redirect('back')
         })
@@ -76,5 +85,15 @@ class PersonalHandler {
             console.log(err)
         })
     }
+    restore(req, res) {
+        Data.restore({_id: req.params.id})
+        .then(()=>{
+          res.redirect('back')
+        })
+        .catch (err=>{
+            console.log(err)
+        })
+    }
+   
 }
 module.exports = new PersonalHandler();

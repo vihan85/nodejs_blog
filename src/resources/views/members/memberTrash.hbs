@@ -1,7 +1,7 @@
 <div class="">
     <div class="member-list">
-      Member List. <br>
-      <a href="/personal/trash"> Trash</a>
+      Trash Member List. <br>
+      <a href="/personal/members"> Member List</a>
     </div>
     <table class="table mt-40">
     <thead>
@@ -19,7 +19,7 @@
             <th scope="row">{{sum @index 1}}</th>
             <td >{{this.title}}</td>
             <td>{{this.thum}}</td>
-            <td><a href="/personal/{{this._id}}/edit" class="btn btn-link">Change</a></td>
+            <td><a href="/personal/{{this._id}}/restore" data-id={{this._id}} class="btn btn-link btn-restore">Restore</a></td>
             <td><a href="/personal/{{this._id}}/delete" class="btn btn-link" data-toggle="modal" data-target="#exampleModal" data-id={{this._id}} data-name={{this.slug}} >Delete</a></td>
             </tr>
         {{/each}}
@@ -50,6 +50,9 @@
 </div>
 {{!-- form delete --}}
 <form method="POST" id="form-delete"></form>
+{{!-- form restore --}}
+<form method="POST" id="form-restore"></form>
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         $('#exampleModal').on('show.bs.modal', function (event) {
@@ -66,6 +69,16 @@
                 formDelete.submit()
             })
         })
+        // restore
+            const restoreBtn = $('.btn-restore')
+            const formRestore = $('#form-restore')
+            restoreBtn.click(function(e) {
+                e.preventDefault()
+                const id = $(this).attr('data-id')
+                const actionValue =  `/personal/${id}/restore?_method=PATCH`
+                formRestore.attr('action',actionValue)
+                formRestore.submit()
+            })
     });
 
 </script>
