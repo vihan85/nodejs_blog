@@ -12,6 +12,7 @@ router.put('/:id/update',personalController.update);
 router.get('/:id/edit',personalController.edit);
 router.patch('/:id/restore',personalController.restore);
 router.delete('/:id/delete',personalController.delete);
+router.delete('/:id/forcedelete',personalController.forceDelete);
 router.get('/:slug', personalController.slug);
 
 module.exports = router;

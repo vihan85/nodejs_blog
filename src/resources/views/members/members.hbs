@@ -49,7 +49,7 @@
   </div>
 </div>
 {{!-- form delete --}}
-<form method="POST" id="form-delete"></form>
+<form method="POST" id="form-softDelete"></form>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         $('#exampleModal').on('show.bs.modal', function (event) {
@@ -59,7 +59,7 @@
             const modalBodyElemt = $('.modal-body')
             modalBodyElemt.html(`Do you want to delete member ${name}`)
             const btnDelete = $('.btn-danger')
-            const formDelete = $('#form-delete')
+            const formDelete = $('#form-softDelete')
             const actionValue =  `/personal/${id}/delete?_method=DELETE`
             btnDelete.click(function () {
                 formDelete.attr('action',actionValue)

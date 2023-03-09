@@ -20,7 +20,13 @@
             <td >{{this.title}}</td>
             <td>{{this.thum}}</td>
             <td><a href="/personal/{{this._id}}/restore" data-id={{this._id}} class="btn btn-link btn-restore">Restore</a></td>
-            <td><a href="/personal/{{this._id}}/delete" class="btn btn-link" data-toggle="modal" data-target="#exampleModal" data-id={{this._id}} data-name={{this.slug}} >Delete</a></td>
+            <td><a href="/personal/{{this._id}}/delete" class="btn btn-link" data-toggle="modal" data-target="#exampleModal" data-id={{this._id}} data-name={{this.slug}} >Force Delete</a></td>
+            </tr>
+            {{else}}
+            <tr class="text-center" >
+                <td colspan="3">
+                    Don't member in trash. Go to <a href="/personal/members">Member List</a>
+                </td>
             </tr>
         {{/each}}
         
@@ -63,7 +69,7 @@
             modalBodyElemt.html(`Do you want to delete member ${name}`)
             const btnDelete = $('.btn-danger')
             const formDelete = $('#form-delete')
-            const actionValue =  `/personal/${id}/delete?_method=DELETE`
+            const actionValue =  `/personal/${id}/forcedelete?_method=DELETE`
             btnDelete.click(function () {
                 formDelete.attr('action',actionValue)
                 formDelete.submit()

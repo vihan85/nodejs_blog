@@ -94,6 +94,15 @@ class PersonalHandler {
             console.log(err)
         })
     }
+    forceDelete(req, res) {
+        Data.deleteOne({_id: req.params.id})
+        .then(()=>{
+          res.redirect('back')
+        })
+        .catch (err=>{
+            console.log(err)
+        })
+    }
    
 }
 module.exports = new PersonalHandler();
