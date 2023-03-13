@@ -1,5 +1,6 @@
 const Data = require('../models/members')
 const mongooseHelper = require('../../helper/mongoose.helper')
+const { count } = require('../models/members')
 const mongooseToObject = mongooseHelper.mongooseToObject
 class PersonalHandler {
     index(req, res) {
@@ -55,11 +56,22 @@ class PersonalHandler {
     }
 
     show(req, res) {
-        Data.find({})
-        .then((respson)=> {
-            const data =mongooseToObject(respson)
-            res.render('members/members',{data})
+        Promise.all([Data.countDeleted(),Data.find({})])
+        .then(([count,data])=>{
+            const members = mongooseToObject(data)
+            res.render('members/members',{count,members})
+            
         })
+        // Data.countDeleted()
+        // .then((count)=>{
+        //     console.log("count", count)
+
+        // })
+        // Data.find({})
+        // .then((respson)=> {
+        //     const data =mongooseToObject(respson)
+        //     res.render('members/members',{data})
+        // })
         .catch((err)=>{
            console.log(err)
         })
