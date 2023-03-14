@@ -11,9 +11,18 @@ nav .dropdown-menu a {
   color: black !important; }
 
 .member-list {
-  font-size: 20px;
+  font-size: 25px;
   font-weight: 600;
   display: block; }
   .member-list a {
     display: block;
-    margin: 10px 0; }
+    margin: 10px 0;
+    font-size: 16px;
+    font-weight: 500; }
+
+.control {
+  width: 500px;
+  height: 50px; }
+
+.checkbox-selected-all-option {
+  width: 120px; }

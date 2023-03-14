@@ -5,9 +5,24 @@
       <a href="/personal/trash"> Trash ({{count}})</a>
       {{/if}}
     </div>
+    <div class="d-flex align-items-center">
+      <div class="form-check">
+        <label>Check all</label>
+        <input name="check-all" type="checkbox" value="option1" >
+      </div>
+      
+      <select class="form-control form-control-sm checkbox-selected-all-option">
+        <option>1</option>
+        <option>1</option>
+        <option>1</option>
+      </select>
+      
+      <button type="button" class="btn btn-primary btn-sm disabled ">Apply</button>
+    </div>
     <table class="table mt-40">
     <thead>
         <tr>
+        <th scope="col"></th>
         <th scope="col">#</th>
         <th scope="col">Name</th>
         <th scope="col">Thum</th>
@@ -17,7 +32,10 @@
     </thead>
     <tbody>
         {{#each members}}
-            <tr >
+          <tr >
+            <th>
+                <input name="check-box"  type="checkbox" value={{this._id}} >
+            </th>
             <th scope="row">{{sum @index 1}}</th>
             <td >{{this.title}}</td>
             <td>{{this.thum}}</td>
@@ -68,7 +86,27 @@
                 formDelete.submit()
             })
         })
-        // delete count
+        // selected all
+        const inputElmCheckAll = $('input[name="check-all"]')
+        const inputElmChecked = $('input[name="check-box"]')
+        const inputCheckLength = inputElmChecked.length
+        inputElmCheckAll.change(function(e){
+          const checked = $(this).prop('checked')
+          inputElmChecked.attr('checked',checked)
+      
+        })
+        inputElmChecked.change(function(){
+         const checked = $('input[name="check-box"]:checked').length
+      
+        if(checked < inputCheckLength) {
+          inputElmCheckAll.prop('checked',false)
+        }else {
+          inputElmCheckAll.prop('checked',true)
+        }
+
+        })
+      // submit
+      const btnApply = $('btn')
 
     });
 
