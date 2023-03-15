@@ -56,22 +56,19 @@ class PersonalHandler {
     }
 
     show(req, res) {
-        Promise.all([Data.countDeleted(),Data.find({})])
+        let dataMembers = Data.find({})
+
+        if(req.query.hasOwnProperty('_sort')) {
+            dataMembers = dataMembers.sort({
+                [req.query.column] : req.query.type
+            })
+        }
+
+        Promise.all([Data.countDeleted(),dataMembers])
         .then(([count,data])=>{
             const members = mongooseToObject(data)
             res.render('members/members',{count,members})
-            
         })
-        // Data.countDeleted()
-        // .then((count)=>{
-        //     console.log("count", count)
-
-        // })
-        // Data.find({})
-        // .then((respson)=> {
-        //     const data =mongooseToObject(respson)
-        //     res.render('members/members',{data})
-        // })
         .catch((err)=>{
            console.log(err)
         })
