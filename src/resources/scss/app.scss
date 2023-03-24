@@ -2,3 +2,41 @@
 h1 {
     color: $red-color;
 }
+.personal-item{
+    margin-top: 20px;
+}
+nav{
+    a{
+
+        color: white !important;
+    }
+    .dropdown-menu{
+        a{
+            color: black !important;
+        }
+    }
+}
+.member-list{
+    font-size: 25px;
+    font-weight: 600;
+    display: block;
+    a{
+        display: block;
+        margin: 10px 0;
+        font-size: 16px;
+        font-weight: 500;
+
+    }
+}
+.control {
+  width: 500px;
+  height: 50px;
+}
+.checkbox-selected-all-option{
+    width: 120px;
+}.mr-10{
+    margin-right:  10px;
+}
+.page-item-color{
+    color:  black !important
+}

@@ -1,0 +1,137 @@
+<div class="">
+    <div class="member-list">
+      Member List. <br>
+      {{#if count}}
+      <a href="/personal/trash"> Trash ({{count}})</a>
+      {{/if}}
+    </div>
+    <div class="d-flex align-items-center">
+      <div class="form-check mr-10">
+        <label>Check all</label>
+        <input name="check-all" type="checkbox" value="option1" >
+      </div>
+      
+      <select class="form-control form-control-sm checkbox-selected-all-option mr-10">
+        <option>1</option>
+        <option>1</option>
+        <option>1</option>
+      </select>
+      
+      <button type="button" class="btn btn-primary btn-sm disabled mr-10">Apply</button>
+    </div>
+    <table class="table mt-40">
+    <thead>
+        <tr>
+        <th scope="col"></th>
+        <th scope="col">#</th>
+        <th scope="col">
+          Name
+         {{{sort 'title' _sort}}}
+        </th>
+        <th scope="col">
+          Thum
+          {{{sort 'thum' _sort}}}
+          </th>
+         <th scope="col"></th>
+        <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each members}}
+          <tr >
+            <th>
+                <input name="check-box"  type="checkbox" value={{this._id}} >
+            </th>
+            <th scope="row">{{sum @index 1}}</th>
+            <td >{{this.title}}</td>
+            <td>{{this.thum}}</td>
+            <td><a href="/personal/{{this._id}}/edit" class="btn btn-link">Change</a></td>
+            <td><a href="/personal/{{this._id}}/delete" class="btn btn-link" data-toggle="modal" data-target="#exampleModal" data-id={{this._id}} data-name={{this.slug}} >Delete</a></td>
+            </tr>
+        {{/each}}
+    </tbody>
+    </table>
+    <nav aria-label="...">
+    <ul class="pagination">
+      <li class="page-item disabled">
+        <span class="page-link">Previous</span>
+      </li>
+      <li class="page-item active">
+        <a class="page-link page-item-color" href="#">1</a>
+        </li>
+      <li class="page-item ">
+        <a href="?page=1" class="page-link page-item-color">
+          2
+        </a>
+      </li>
+      <li class="page-item"><a class="page-link page-item-color" href="#">3</a></li>
+      <li class="page-item">
+        <a class="page-link page-item-color" href="#">Next</a>
+      </li>
+    </ul>
+</nav>
+</div>
+
+{{!-- modal comfirm delete --}}
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button id="btn-delete" type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+{{!-- form delete --}}
+<form method="POST" id="form-softDelete"></form>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        $('#exampleModal').on('show.bs.modal', function (event) {
+            const button = $(event.relatedTarget) // Button that triggered the modal
+            const id = button.data('id') // Extract info from data-* attributes
+            const name = button.data('name') // Extract info from data-* attributes
+            const modalBodyElemt = $('.modal-body')
+            modalBodyElemt.html(`Do you want to delete member ${name}`)
+            const btnDelete = $('.btn-danger')
+            const formDelete = $('#form-softDelete')
+            const actionValue =  `/personal/${id}/delete?_method=DELETE`
+            btnDelete.click(function () {
+                formDelete.attr('action',actionValue)
+                formDelete.submit()
+            })
+        })
+        // selected all
+        const inputElmCheckAll = $('input[name="check-all"]')
+        const inputElmChecked = $('input[name="check-box"]')
+        const inputCheckLength = inputElmChecked.length
+        inputElmCheckAll.change(function(e){
+          const checked = $(this).prop('checked')
+          inputElmChecked.attr('checked',checked)
+      
+        })
+        inputElmChecked.change(function(){
+         const checked = $('input[name="check-box"]:checked').length
+      
+        if(checked < inputCheckLength) {
+          inputElmCheckAll.prop('checked',false)
+        }else {
+          inputElmCheckAll.prop('checked',true)
+        }
+
+        })
+      // submit
+      const btnApply = $('btn')
+
+    });
+
+</script>
