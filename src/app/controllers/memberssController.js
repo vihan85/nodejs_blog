@@ -1,7 +1,8 @@
 const Data = require('../models/members')
 const mongooseHelper = require('../../helper/mongoose.helper')
 const mongooseToObject = mongooseHelper.mongooseToObject
-class memberssController {
+class 
+memberssController {
     index(req, res) {
         Data.find({})
         .then((respson)=> {

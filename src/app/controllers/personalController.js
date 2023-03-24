@@ -45,6 +45,9 @@ class PersonalHandler {
     }
 
     showTrash(req, res) {
+
+
+        
         Data.findDeleted({})
         .then((respson)=> {
             const data =mongooseToObject(respson)
@@ -57,7 +60,12 @@ class PersonalHandler {
 
     show(req, res) {
         let dataMembers = Data.find({})
-
+        const curentPage = req.query.page
+        const limit = 8
+        const startIndex = curentPage * limit
+        if(req.query.hasOwnProperty('page')) {
+            dataMembers = Data.find({}).skip().limit(8)
+        }
         if(req.query.hasOwnProperty('_sort')) {
             dataMembers = dataMembers.sort({
                 [req.query.column] : req.query.type
