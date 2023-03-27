@@ -28,7 +28,9 @@ app.use(morgan("combined"));
 
 // custom middle ware
 const SortMiddleware = require('./app/middlewares/SortMiddleware')
+const authFormMiddleware = require('./app/middlewares/authFormMisdleware')
 app.use(SortMiddleware)
+app.use(authFormMiddleware)
 
 //template engine / cònig healper
 app.engine(
