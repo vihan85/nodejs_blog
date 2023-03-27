@@ -7,6 +7,7 @@ const Auth = new Schema ({
     email:String,
     password: { type: String, required: true, bcrypt: true },
     secret: { type: String, bcrypt: true },
+    actoken: String,
     foo: {
     bar: {
       baz: { type: String, bcrypt: true }

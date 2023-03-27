@@ -1,6 +1,6 @@
 const Auth = require('../models/auth')
 const mongooseHelper = require('../../helper/mongoose.helper')
-const { exists } = require('../models/members')
+const jwt = require('jsonwebtoken');
 const mongooseToObject = mongooseHelper.mongooseToObject
 class authController {
     index(req, res) {
@@ -8,17 +8,25 @@ class authController {
     }
     async login(req, res) {
         const userExisting = await Auth.findOne({email: req.body.email})
-        try {
-            const valid =  await userExisting.verifyPassword(req.body.password)
-            if(valid) {
-                // signin
-
-            } else{
-                console.log('please! create account')
+        if(!userExisting) {
+            res.status(401).send('Tên đăng nhập không tồn tại.')
+            return
             }
-        } catch (error) {
-            console.log(error)
+        const valid =  await userExisting.verifyPassword(req.body.password)
+        if(!valid) {
+            res.status(401).send('mật khẩu không đúng.')
+            return
         }
+        const token = jwt.sign(JSON.stringify({password:req.body.password}), 'shhhhh');
+        jwt.verify(token, 'shhhhh', function(err, decoded) {
+            if (err) {
+                console.log(err)
+            } else {
+                console.log(decoded)
+            }
+          });
+       
+        
     }
     async signup(req, res) {
         const userExisting = await Auth.findOne({email: req.body.email})
@@ -28,9 +36,10 @@ class authController {
             const user = await Auth.create(req.body)
             const valid = await user.verifyPassword(req.body.password)
             if(valid) {
-                const createUser = new Auth(req.body)
+                const token = jwt.sign(JSON.stringify({ foo: 'bar' }),'shhhhh');
+                const createUser = new Auth({...req.body, actoken:token})
                 createUser.save()
-                Auth.close()
+               
             }
         }
     }
