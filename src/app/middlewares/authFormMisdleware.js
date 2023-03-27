@@ -1,6 +1,5 @@
 module.exports = function authForm (req, res, next) {
     res.locals.auth = {}
-        
     if(req.query.hasOwnProperty('login')) {
         Object.assign(res.locals.auth, {
             link: '/auth?signup',

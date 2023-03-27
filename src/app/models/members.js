@@ -8,7 +8,8 @@ const Data = new Schema ({
     body: String,
     des: String,
     thum: String,
-    slug: { type: String, slug: "title"}
+    slug: { type: String, slug: "title"},
+    
 })
 
 // plugin

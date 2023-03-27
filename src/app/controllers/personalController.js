@@ -46,8 +46,6 @@ class PersonalHandler {
 
     showTrash(req, res) {
 
-
-        
         Data.findDeleted({})
         .then((respson)=> {
             const data =mongooseToObject(respson)
