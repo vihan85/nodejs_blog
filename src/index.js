@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
 const handlebars = require('express-handlebars');
+const cookieParser = require("cookie-parser");
 
 const app = express();
 const port = 3210;
@@ -25,13 +26,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // HTTP logger
 app.use(morgan("combined"));
+app.use(cookieParser());
 
 // custom middle ware
 const SortMiddleware = require('./app/middlewares/SortMiddleware')
 const authFormMiddleware = require('./app/middlewares/authFormMisdleware')
+const authMiddleware = require('./app/middlewares/authMiddleware')
 app.use(SortMiddleware)
 app.use(authFormMiddleware)
-
+app.use('/myPage',authMiddleware)
 //template engine / cònig healper
 app.engine(
     '.hbs',

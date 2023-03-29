@@ -11,9 +11,5 @@ function routes(app) {
     app.use('/personal', personalRoute);
     app.use('/auth', authRoute);
     app.get('/mypage', myPagesController.mypage);
-    
-
-    
-
 }
 module.exports = routes;
