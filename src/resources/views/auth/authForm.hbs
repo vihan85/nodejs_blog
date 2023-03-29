@@ -1,14 +1,14 @@
 <div>
     <p class="text-center"> <strong>{{auth.title}}</strong></p>
-    <form method="POST" action="/auth/{{auth.type}}">
+    <form id="myForm"  data-action="/auth/{{auth.type}}">
         <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
-            <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+            <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
             <small id="emailHelp" class="form-text text-muted">{{message}}</small>
         </div>
         <div class="form-group">
             <label for="exampleInputPassword1">Password</label>
-            <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            <input type="password" name="password" class="form-control" id="password" placeholder="Password">
         </div>
         <div class="form-check">
             <input type="checkbox" class="form-check-input" id="exampleCheck1">
@@ -18,6 +18,30 @@
             <a href={{auth.link}}>{{auth.auth}}</a>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
-        
     </form>
 </div>
+<script>
+     document.addEventListener('DOMContentLoaded', function() {
+        $('#myForm').submit(function(e){
+            e.preventDefault()
+            const password = $('#password').val()
+            const email = $('#email').val()
+            fetch('http://localhost:3210/auth/login',{
+                method: "POST",
+                body: JSON.stringify({email:email,password:password}),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(function(res){
+                return res.json()
+            })
+            .then(function(res){
+                console.log(res)
+            })
+            .catch(function(err){
+                console.log(err)
+            })
+        })
+     })
+</script>

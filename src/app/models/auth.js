@@ -4,6 +4,7 @@ const mongooseDelete = require('mongoose-delete');
 
 const Schema = mongoose.Schema
 const Auth = new Schema ({
+    acceptToken:String,
     email:String,
     password: { type: String, required: true, bcrypt: true },
     secret: { type: String, bcrypt: true },
@@ -17,7 +18,6 @@ const Auth = new Schema ({
 })
 
 // plugin
-Auth.plugin(mongooseDelete, { overrideMethods: 'all' });
 Auth.plugin(bcrypt);
 
 

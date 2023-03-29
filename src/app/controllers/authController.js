@@ -6,26 +6,23 @@ class authController {
     index(req, res) {
         res.render('auth/authform')
     }
-    async login(req, res) {
+    async login(req, res,next) {
         const userExisting = await Auth.findOne({email: req.body.email})
         if(!userExisting) {
             res.status(401).send('Tên đăng nhập không tồn tại.')
             return
             }
-        const valid =  await userExisting.verifyPassword(req.body.password)
-        if(!valid) {
+        const passwordValid =  await userExisting.verifyPassword(req.body.password)
+        if(!passwordValid) {
             res.status(401).send('mật khẩu không đúng.')
             return
         }
-        const token = jwt.sign(JSON.stringify({password:req.body.password}), 'shhhhh');
-        jwt.verify(token, 'shhhhh', function(err, decoded) {
-            if (err) {
-                console.log(err)
-            } else {
-                console.log(decoded)
-            }
-          });
-       
+        const acceptToken = jwt.sign(JSON.stringify({password:req.body.password}), 'shhhhh');
+        res.json({
+            message: 'Đăng nhập thành công',
+            acceptToken
+        })
+        res.end()
         
     }
     async signup(req, res) {
@@ -36,12 +33,14 @@ class authController {
             const user = await Auth.create(req.body)
             const valid = await user.verifyPassword(req.body.password)
             if(valid) {
-                const token = jwt.sign(JSON.stringify({ foo: 'bar' }),'shhhhh');
-                const createUser = new Auth({...req.body, actoken:token})
+                const createUser = new Auth({...req.body, acceptToken:''})
                 createUser.save()
                
             }
         }
+    }
+    mypage(req, res) {
+        res.render('myPages/orderPage')
     }
 }
 module.exports = new authController();
