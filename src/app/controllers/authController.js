@@ -17,10 +17,17 @@ class authController {
             res.status(401).send('mật khẩu không đúng.')
             return
         }
-        const acceptToken = jwt.sign(JSON.stringify({password:req.body.password}), 'shhhhh');
+        let acceptToken;
+        if(req.body.permission) {
+            acceptToken = req.body.permission
+        }else{
+            acceptToken = jwt.sign(JSON.stringify({password:req.body.password}), 'shhhhh');
+
+        }
         res.json({
             message: 'Đăng nhập thành công',
-            acceptToken
+            acceptToken,
+            ok: true
         })
         res.end()
         
@@ -41,6 +48,8 @@ class authController {
     }
     mypage(req, res) {
         res.render('myPages/orderPage')
+    }
+    logout(req, res) {
     }
 }
 module.exports = new authController();

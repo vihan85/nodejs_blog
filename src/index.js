@@ -32,10 +32,11 @@ app.use(cookieParser());
 const SortMiddleware = require('./app/middlewares/SortMiddleware')
 const authFormMiddleware = require('./app/middlewares/authFormMisdleware')
 const authMiddleware = require('./app/middlewares/authMiddleware')
+const authLogin = require('./app/controllers/authController')
 app.use(SortMiddleware)
 app.use(authFormMiddleware)
-app.use('/myPage',authMiddleware)
-//template engine / cònig healper
+app.use('/myPage',authMiddleware,authFormMiddleware)
+//template engine / config healper
 app.engine(
     '.hbs',
     handlebars.engine({

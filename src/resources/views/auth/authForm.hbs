@@ -20,28 +20,3 @@
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
-<script>
-     document.addEventListener('DOMContentLoaded', function() {
-        $('#myForm').submit(function(e){
-            e.preventDefault()
-            const password = $('#password').val()
-            const email = $('#email').val()
-            fetch('http://localhost:3210/auth/login',{
-                method: "POST",
-                body: JSON.stringify({email:email,password:password,token: document.cookie}),
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            })
-            .then(function(res){
-                return res.json()
-            })
-            .then(function(res){
-                const cookie =  document.cookie=`acceptToken=${res.acceptToken}`;
-            })
-            .catch(function(err){
-                console.log(err)
-            })
-        })
-     })
-</script>
