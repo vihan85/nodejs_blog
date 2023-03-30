@@ -2,6 +2,8 @@ const Auth = require('../models/auth')
 const mongooseHelper = require('../../helper/mongoose.helper')
 const jwt = require('jsonwebtoken');
 const mongooseToObject = mongooseHelper.mongooseToObject
+const variable =  require('../../app/variable')
+
 class authController {
     index(req, res) {
         res.render('auth/authform')
@@ -21,7 +23,7 @@ class authController {
         if(req.body.permission) {
             acceptToken = req.body.permission
         }else{
-            acceptToken = jwt.sign(JSON.stringify({password:req.body.password}), 'shhhhh');
+            acceptToken = jwt.sign(JSON.stringify({password:req.body.password}), variable.secretKeyJwt());
 
         }
         res.json({

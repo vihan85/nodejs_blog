@@ -8,6 +8,8 @@ const app = express();
 const port = 3210;
 const db = require('./config/db')
 
+//config variable enviroment 
+require('dotenv').config();
 
 //  method Override 
 var methodOverride = require('method-override')
