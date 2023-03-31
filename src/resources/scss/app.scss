@@ -1,18 +1,53 @@
 @import 'variable';
-h1 {
-    color: $red-color;
+@import 'function';
+
+.main-header{
+    background-color: $white-color;
+    border-bottom: 1px solid $boder-color;
 }
+
 .personal-item{
     margin-top: 20px;
 }
+.nav-link{
+    &:hover{
+        color: $primari-color !important;
+    }
+}
+.item{
+    list-style-type: none;
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: $primari-color;
+}
+.product-wrapper{
+    min-height: 450px;
+}
+.card{
+    min-height: 200px;
+    &:hover {
+        z-index: 3;
+        cursor: pointer;
+        box-shadow: 0 7px 10px rgba(101,101,101,0.16);
+        .btn-card{
+            display: block;
+
+        }
+    }
+}
+.btn-card{
+    display: none;
+    transition: display 2s linear;
+    background-color: $btn-color;
+}
 nav{
     a{
-
-        color: white !important;
+        text-transform: uppercase;
+        font-weight: 700;
     }
     .dropdown-menu{
         a{
-            color: black !important;
+            font-weight: 600;
         }
     }
 }
@@ -25,7 +60,6 @@ nav{
         margin: 10px 0;
         font-size: 16px;
         font-weight: 500;
-
     }
 }
 .control {
@@ -44,4 +78,31 @@ nav{
 .auth-form{
 height: 30vw;
 align-items: center;
+}
+//footer
+footer{
+    @include backGroundBlack($theme:black)
+}
+.footer-wrapper{
+    padding: 50px 0;
+    ul{
+        padding: 0;
+    }
+    li{
+        list-style-type: none;
+        color: $text-color;
+        &:hover{ 
+            color: $primari-color;
+            cursor: pointer;
+        }
+    }
+}
+.btn-primary{
+    border-radius: 42px;
+    padding: 10px;
+    @include backGroundBlack($theme:black);
+    &:hover{
+        @include backGroundBlack($theme:$primari-color);
+        
+    }
 }

@@ -1,14 +1,42 @@
-h1 {
-  color: black; }
+.main-header {
+  background-color: #ffff;
+  border-bottom: 1px solid #ebebeb; }
 
 .personal-item {
   margin-top: 20px; }
 
+.nav-link:hover {
+  color: #FFB91F !important; }
+
+.item {
+  list-style-type: none;
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: #FFB91F; }
+
+.product-wrapper {
+  min-height: 450px; }
+
+.card {
+  min-height: 200px; }
+  .card:hover {
+    z-index: 3;
+    cursor: pointer;
+    box-shadow: 0 7px 10px rgba(101, 101, 101, 0.16); }
+    .card:hover .btn-card {
+      display: block; }
+
+.btn-card {
+  display: none;
+  transition: display 2s linear;
+  background-color: #202020; }
+
 nav a {
-  color: white !important; }
+  text-transform: uppercase;
+  font-weight: 700; }
 
 nav .dropdown-menu a {
-  color: black !important; }
+  font-weight: 600; }
 
 .member-list {
   font-size: 25px;
@@ -36,3 +64,27 @@ nav .dropdown-menu a {
 .auth-form {
   height: 30vw;
   align-items: center; }
+
+footer {
+  background-color: black;
+  color: #ffff; }
+
+.footer-wrapper {
+  padding: 50px 0; }
+  .footer-wrapper ul {
+    padding: 0; }
+  .footer-wrapper li {
+    list-style-type: none;
+    color: #7e7f7e; }
+    .footer-wrapper li:hover {
+      color: #FFB91F;
+      cursor: pointer; }
+
+.btn-primary {
+  border-radius: 42px;
+  padding: 10px;
+  background-color: black;
+  color: #ffff; }
+  .btn-primary:hover {
+    background-color: #FFB91F;
+    color: black; }

@@ -1,0 +1,12 @@
+@import 'variable';
+
+@mixin backGroundBlack ($theme) {
+    @if($theme  ==  black){
+        background-color: $theme ;
+        color: $white-color;
+    }
+    @if($theme  ==  $primari-color){
+        background-color: $theme ;
+        color: $black-color;
+    }
+}
