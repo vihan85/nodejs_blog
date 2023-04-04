@@ -69,9 +69,38 @@ app.engine(
 );
 app.set('view engine', '.hbs');
 app.set('views', path.join(__dirname, 'resources/views'));
+// routes
 
+// socket 
+const cors = require('cors');
+const http = require('http');
+const server = http.createServer(app)
+const { Server } = require("socket.io");
+const io = new Server(server);
+app.use(cors());
+
+io.on('connection', (socket) => {
+    socket.on("disconnect", function()
+        {
+            console.log('Disconnected');
+        });
+         //server lắng nghe dữ liệu từ client
+    socket.on("Client-sent-data", function(data)
+        {
+            //sau khi lắng nghe dữ liệu, server phát lại dữ liệu này đến các client khác
+            console.log('a user connected');
+            socket.emit("Server-sent-data", data);
+
+        });
+});
 routes(app);
 
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
+server.listen(3210, () => {
+    console.log('listening on *:3211');
+    
 });
+
+// app.listen(port, () => {
+//     console.log(`Example app listening on port ${port}`);
+// });
+

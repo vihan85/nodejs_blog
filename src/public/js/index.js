@@ -1,5 +1,21 @@
 document.addEventListener('DOMContentLoaded', function() {
+    
     $(document).ready(function(){
+        var socket = io();
+        const inputElm = $('#input')
+        const form = $('#form')
+        form.submit(function(e){
+            e.preventDefault()
+            socket.emit("Client-sent-data", inputElm.val());
+            inputElm.val('')
+        })
+        socket.on("Server-sent-data", function(data)
+			{
+                console.log(data)
+                const message = $("<li></li>").text(data);  
+				$("#messages").append(message);
+			});
+        
         const loginElm = $('.login')
         //submit form login
         $('#myForm').submit(function(e){
@@ -35,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         
         // croll menu
-    
+
         $(window).scroll(function(){
             const scrollTop = $(this).scrollTop(); //current scroll position
             const heaerElm = $('.header')
@@ -47,5 +63,5 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         })
     })
-    
+
 })
