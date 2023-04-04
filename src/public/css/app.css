@@ -77,6 +77,19 @@ body {
   .nav-link:hover {
     color: #FFB91F !important; }
 
+.header {
+  top: -100%;
+  transition: top 1s linear; }
+
+.scroll-header {
+  position: fixed;
+  top: 0 !important;
+  left: 0;
+  right: 0;
+  z-index: 4;
+  background-color: #FFB91F;
+  transition: top 1s linear; }
+
 .item {
   list-style-type: none;
   font-size: 3.5rem;
