@@ -38,6 +38,7 @@ const authLogin = require('./app/controllers/authController')
 app.use(SortMiddleware)
 app.use(authFormMiddleware)
 app.use('/myPage',authMiddleware,authFormMiddleware)
+app.use('/personal/cart',authMiddleware,authFormMiddleware)
 //template engine / config healper
 app.engine(
     '.hbs',

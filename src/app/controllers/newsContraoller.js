@@ -9,7 +9,7 @@ class NewsHandler {
             res.render('news', {data})
         })
         .catch((err)=>{
-            console.log̣̣̣̣̣̣̣̣̣̣̣̣̣(err)
+            console.log(err)
         })
     }
     show(req, res) {

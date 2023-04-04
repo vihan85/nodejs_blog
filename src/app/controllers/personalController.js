@@ -73,7 +73,7 @@ class PersonalHandler {
         Promise.all([Data.countDeleted(),dataMembers])
         .then(([count,data])=>{
             const members = mongooseToObject(data)
-            res.render('members/members',{count,members})
+            res.render('members/cart',{count,members})
         })
         .catch((err)=>{
            console.log(err)

@@ -1,8 +1,4 @@
 <div class="wrapper">
-    <div class="baner">
-        <img src="https://img.freepik.com/premium-photo/male-hand-shows-thumb-up-through-small-scooter-tires-white-background-scooter-service-transport-white-bike-equipment-engine-motor-race-electric-new-detail_75939-1938.jpg" class="img-fluid" alt="Responsive image">
-       
-    </div>
     <div class="products">
         <div class="row">
             <div class="col col-lg-12">
@@ -14,65 +10,18 @@
             </div>
         </div>
         <div class="row no-gutters">
-            <div class="col col-lg-4 col-sm product-wrapper ">
-                <div class="card" style="width: 100%;">
-                    <img class="card-img-top" src="	https://druco-be87.kxcdn.com/druco/wp-content/uploads/2022/04/28-480x480.jpg" class="img-fluid" alt="Responsive image" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">500.000</p>
-                        <a href="#" class="btn btn-primary btn-card">Add to card</a>
+            {{#each data}}
+                <div class="col col-lg-4 col-sm product-wrapper ">
+                    <div class="card" style="width: 100%;">
+                        <img class="card-img-top" src={{this.thum}} class="img-fluid" alt="Responsive image" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">{{this.title}}</h5>
+                            <p class="card-text">500.000</p>
+                            <a href="#" class="btn btn-primary btn-card">Add to card</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col col-lg-4 col-sm product-wrapper">
-                <div class="card" style="width: 100%;">
-                    <img class="card-img-top" src="https://druco-be87.kxcdn.com/druco/wp-content/uploads/2022/04/06-480x480.jpg" class="img-fluid" alt="Responsive image" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">500.000</p>
-                        <a href="#" class="btn btn-primary btn-card">Add to card</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col col-lg-4 col-sm product-wrapper">
-                <div class="card" style="width: 100%;">
-                    <img class="card-img-top" src="https://druco-be87.kxcdn.com/druco/wp-content/uploads/2022/04/11-480x480.jpg" class="img-fluid" alt="Responsive image" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">500.000</p>
-                        <a href="#" class="btn btn-primary btn-card">Add to card</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col col-lg-4 col-sm product-wrapper">
-                <div class="card" style="width: 100%;">
-                    <img class="card-img-top" src="	https://druco-be87.kxcdn.com/druco/wp-content/uploads/2022/04/10-480x480.jpg" class="img-fluid" alt="Responsive image" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">500.000</p>
-                        <a href="#" class="btn btn-primary btn-card">Add to card</a>
-                    </div>
-                </div>
-            </div> <div class="col col-lg-4 col-sm product-wrapper">
-                <div class="card" style="width: 100%;">
-                    <img class="card-img-top" src="	https://druco-be87.kxcdn.com/druco/wp-content/uploads/2022/04/10-480x480.jpg" class="img-fluid" alt="Responsive image" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">500.000</p>
-                        <a href="#" class="btn btn-primary btn-card">Add to card</a>
-                    </div>
-                </div>
-            </div> <div class="col col-lg-4 col-sm product-wrapper">
-                <div class="card" style="width: 100%;">
-                    <img class="card-img-top" src="	https://druco-be87.kxcdn.com/druco/wp-content/uploads/2022/04/10-480x480.jpg" class="img-fluid" alt="Responsive image" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">500.000</p>
-                        <a href="#" class="btn btn-primary btn-card">Add to card</a>
-                    </div>
-                </div>
-            </div>
-            
+            {{/each}}
         </div>
     </div>
 </div>
