@@ -5,7 +5,7 @@ const personalController = require('../app/controllers/personalController');
 //[GET] /news/:slug
 router.get('/', personalController.index);
 router.get('/create', personalController.create);
-router.get('/members', personalController.show);
+router.get('/cart', personalController.show);
 router.get('/trash', personalController.showTrash);
 router.post('/store', personalController.store);
 router.put('/:id/update',personalController.update);
