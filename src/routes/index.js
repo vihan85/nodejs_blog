@@ -1,6 +1,7 @@
 const newsRoute = require('./new.route');
 const personalRoute = require('./personal.route');
 const myPagesController = require('../app/controllers/pricvateContraoller/mypageContraoller')
+const chatController = require('../app/controllers/chatController')
 const authRoute =  require('./auth.route');
 const Data = require('../app/models/members');
 const mongooseHelper = require('../helper/mongoose.helper')
@@ -20,5 +21,7 @@ function routes(app) {
     app.use('/personal', personalRoute);
     app.use('/auth', authRoute);
     app.get('/mypage', myPagesController.mypage);
+    app.get('/chat', chatController.index);
+    
 }
 module.exports = routes;
